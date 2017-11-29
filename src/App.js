@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import ShowProfile from './components/ShowProfile'
 
 class App extends Component {
   state = {
@@ -11,9 +12,9 @@ class App extends Component {
     }
   }
 
-  onChangeName = (newValue, name) => {
+  onChangeValue = (newValue, key) => {
     this.setState((prevState) => {
-      const newUser = { ...prevState.user, [name]: newValue }
+      const newUser = { ...prevState.user, [key]: newValue }
       return {
         user: newUser
       }
@@ -25,16 +26,18 @@ class App extends Component {
 
     return (
       <div className="App">
-        <h1>Linkedin Profile Editor</h1>
-        <img src={ user.profileImage } />
-        <p>Name: { user.firstName } { user.lastName }</p>
+        <ShowProfile
+            firstName={ user.firstName }
+            lastName={ user.lastName }
+            profileImage={ user.profileImage }
+        />
 
         <label>
           First name:
           {' '}
           <input type="text" value={ user.firstName }
             onChange={ (event) => {
-                this.onChangeName(event.target.value, 'firstName')
+                this.onChangeValue(event.target.value, 'firstName')
               }
             }
           />
@@ -45,7 +48,7 @@ class App extends Component {
           {' '}
           <input type="text" value={ user.lastName }
             onChange={ (event) => {
-                this.onChangeName(event.target.value, 'lastName')
+                this.onChangeValue(event.target.value, 'lastName')
               }
             }
           />
@@ -56,7 +59,7 @@ class App extends Component {
           {' '}
           <input type="text" value={ user.profileImage }
             onChange={ (event) => {
-                this.onChangeName(event.target.value, 'profileImage')
+                this.onChangeValue(event.target.value, 'profileImage')
               }
             }
           />

@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import ShowProfile from './components/ShowProfile'
 import EditProfile from './components/EditProfile'
+import ToggleButton from './components/ToggleButton'
 
 class App extends Component {
   state = {
@@ -10,6 +11,10 @@ class App extends Component {
       firstName: 'Alice',
       lastName: 'Jones',
       profileImage: 'https://randomuser.me/api/portraits/lego/1.jpg'
+    },
+    toggleButton: {
+      value: false,
+      text: 'Show Edit Fields'
     }
   }
 
@@ -22,26 +27,45 @@ class App extends Component {
     })
   }
 
+  onToggleChange = () => {
+    this.setState(({ toggleButton }) => {
+      toggleButton.value = !toggleButton.value
+      return { toggleButton }
+    })
+  }
+
+
   render() {
     const user = this.state.user
+    const toggleButton = this.state.toggleButton
 
     return (
       <div className="App">
-        <ShowProfile
-            firstName={ user.firstName }
-            lastName={ user.lastName }
-            profileImage={ user.profileImage }
-        />
-
-        <EditProfile
-            firstName={ user.firstName }
-            lastName={ user.lastName }
-            profileImage={ user.profileImage }
-            onChangeValue={ (newValue, key) => {
-                this.onChangeValue(newValue, key)
+        { !toggleButton.value &&
+          <ShowProfile
+              firstName={ user.firstName }
+              lastName={ user.lastName }
+              profileImage={ user.profileImage }
+          />
+        }
+        { toggleButton.value &&
+          <EditProfile
+              firstName={ user.firstName }
+              lastName={ user.lastName }
+              profileImage={ user.profileImage }
+              onChangeValue={ (newValue, key) => {
+                  this.onChangeValue(newValue, key)
+                }
               }
-            }
-        />
+          />
+        }
+        <ToggleButton onToggleChange={ () => {
+            this.onToggleChange()
+          }
+        }
+        >
+          { toggleButton.text }
+        </ToggleButton>
       </div>
     );
   }

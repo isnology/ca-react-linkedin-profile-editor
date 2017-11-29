@@ -1,27 +1,42 @@
 import React from 'react'
 
-function EditProfile({ description, completed = false, onToggleCompleted, onDescriptionChange }) {
+function EditProfile({ firstName, lastName, profileImage, onChangeValue }) {
   return (
-      <div className="item">
-        <button type='button'
-                onClick={ (event) => {
-                  onToggleCompleted()
-                }
-                }
-        >
-          { completed ? '✅' : '❎' }
-        </button>
-        <input type="text"
-               onChange={ (event) => {
-                 onDescriptionChange(event.target.value)
+      <div>
+        <label>
+          First name:
+          {' '}
+          <input type="text" value={ firstName }
+             onChange={ (event) => {
+                 onChangeValue(event.target.value, 'firstName')
                }
+             }
+          />
+        </label>
+        <div />
+        <label>
+          Last name:
+          {' '}
+          <input type="text" value={ lastName }
+             onChange={ (event) => {
+                 onChangeValue(event.target.value, 'lastName')
                }
-               value={ description }
-        />
+             }
+          />
+        </label>
+        <div />
+        <label>
+          Image Url:
+          {' '}
+          <input type="text" value={ profileImage }
+             onChange={ (event) => {
+                 onChangeValue(event.target.value, 'profileImage')
+               }
+             }
+          />
+        </label>
       </div>
   )
 }
-
-
 
 export default EditProfile

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import ShowProfile from './components/ShowProfile'
+import EditProfile from './components/EditProfile'
 
 class App extends Component {
   state = {
@@ -32,38 +33,15 @@ class App extends Component {
             profileImage={ user.profileImage }
         />
 
-        <label>
-          First name:
-          {' '}
-          <input type="text" value={ user.firstName }
-            onChange={ (event) => {
-                this.onChangeValue(event.target.value, 'firstName')
+        <EditProfile
+            firstName={ user.firstName }
+            lastName={ user.lastName }
+            profileImage={ user.profileImage }
+            onChangeValue={ (newValue, key) => {
+                this.onChangeValue(newValue, key)
               }
             }
-          />
-        </label>
-        <div />
-        <label>
-          Last name:
-          {' '}
-          <input type="text" value={ user.lastName }
-            onChange={ (event) => {
-                this.onChangeValue(event.target.value, 'lastName')
-              }
-            }
-          />
-        </label>
-        <div />
-        <label>
-          Image Url:
-          {' '}
-          <input type="text" value={ user.profileImage }
-            onChange={ (event) => {
-                this.onChangeValue(event.target.value, 'profileImage')
-              }
-            }
-          />
-        </label>
+        />
       </div>
     );
   }

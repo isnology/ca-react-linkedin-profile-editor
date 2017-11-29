@@ -39,12 +39,24 @@ class App extends Component {
             }
           />
         </label>
+        <div />
         <label>
           Last name:
           {' '}
           <input type="text" value={ user.lastName }
             onChange={ (event) => {
                 this.onChangeName(event.target.value, 'lastName')
+              }
+            }
+          />
+        </label>
+        <div />
+        <label>
+          Image Url:
+          {' '}
+          <input type="text" value={ user.profileImage }
+            onChange={ (event) => {
+                this.onChangeName(event.target.value, 'profileImage')
               }
             }
           />

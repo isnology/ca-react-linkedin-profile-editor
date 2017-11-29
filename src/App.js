@@ -6,6 +6,8 @@ import ToggleButton from './components/ToggleButton'
 import RandomButton from './components/RandomButton'
 import axios from 'axios'
 
+const textForToggleButton = (value) => value ? 'Show Profile Data' : 'Show Edit Fields'
+
 class App extends Component {
   state = {
     user: {
@@ -14,9 +16,7 @@ class App extends Component {
       profileImage: 'https://randomuser.me/api/portraits/lego/1.jpg'
     },
     toggleButton: {
-      value: false,
-      [false]: 'Show Edit Fields',
-      [true]: 'Show Profile Data'
+      value: false
     }
   }
 
@@ -30,7 +30,6 @@ class App extends Component {
   onToggleChange = () => {
     this.setState(({ toggleButton }) => {
       toggleButton.value = !toggleButton.value
-      toggleButton.text = [toggleButton.value].text
       return { toggleButton }
     })
   }
@@ -80,7 +79,7 @@ class App extends Component {
           }
         }
         >
-          { toggleButton[toggleButton.value] }
+          { textForToggleButton(toggleButton.value) }
         </ToggleButton>
         <RandomButton onButtonPress={ () => {
             this.onButtonPress()
